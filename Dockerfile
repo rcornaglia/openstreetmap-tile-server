@@ -7,6 +7,11 @@ FROM ubuntu:18.04
 ENV TZ=UTC
 ENV AUTOVACUUM=on
 ENV UPDATES=disabled
+ENV DOWNLOAD_PBF="https://download.geofabrik.de/south-america/colombia-latest.osm.pbf"
+ENV DOWNLOAD_POLY="https://download.geofabrik.de/south-america/colombia.poly"
+ENV THREADS=32
+ENV OSM2PGSQL_EXTRA_ARGS="-C 50000"
+
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install dependencies
@@ -175,6 +180,9 @@ RUN mkdir -p /home/renderer/src \
  && git checkout 612fe3e040d8bb70d2ab3b133f3b2cfc6c940520 \
  && rm -rf .git \
  && chmod u+x /home/renderer/src/regional/trim_osc.py
+
+RUN wget -nv "$DOWNLOAD_PBF" -O /data.osm.pbf
+RUN wget -nv "$DOWNLOAD_POLY" -O /data.poly
 
 # Start running
 COPY run.sh /
