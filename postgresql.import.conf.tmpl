@@ -1,0 +1,23 @@
+# settings
+
+synchronous_commit = off
+fsync = off
+
+random_page_cost = 1.1
+wal_buffers = 16MB
+maintenance_work_mem = 16GB
+work_mem = 3GB
+shared_buffers = 48GB
+min_wal_size = 1GB
+max_wal_size = 10GB
+effective_io_concurrency = 500
+max_connections = 300
+max_worker_processes = 12
+max_parallel_workers_per_gather = 4
+max_parallel_workers = 12
+checkpoint_timeout = 1h
+checkpoint_completion_target = 0.9
+min_parallel_table_scan_size = 8MB
+min_parallel_index_scan_size = 512kB
+effective_cache_size = 50GB
+
